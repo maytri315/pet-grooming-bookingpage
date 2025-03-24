@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings Dashboard | The Grooming Shed</title>
+    <meta name="description" content="Manage all bookings for The Grooming Shed's dog grooming services in Lucknow, Uttar Pradesh.">
+    <meta name="keywords" content="dog grooming bookings, The Grooming Shed, Lucknow pet grooming">
+    <meta name="author" content="The Grooming Shed">
+    <link rel="stylesheet" href="pract booking page for bussinesscss.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="blur-content">
+    <header>
+        <h1>The Grooming Shed - Bookings Dashboard</h1>
+        <a href="groomig pet pract.html" class="back-link">Back to Home</a>
+    </header>
+    <main>
+        <section class="dashboard">
+            <div class="controls">
+                <div class="filters">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search by name or phone" title="Enter name or phone number">
+                        <button id="searchBtn" title="Search bookings">Search</button>
+                    </div>
+                    <select id="serviceFilter" title="Filter by service">
+                        <option value="">All Services</option>
+                        <option value="Bath & Brush">Bath & Brush</option>
+                        <option value="Nail Trimming">Nail Trimming</option>
+                        <option value="Hair Styling">Hair Styling</option>
+                    </select>
+                    <select id="statusFilter" title="Filter by status">
+                        <option value="">All Statuses</option>
+                        <option value="Upcoming">Upcoming</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <button id="applyFiltersBtn" title="Apply filters">Apply Filters</button>
+                    <button id="resetFiltersBtn" title="Reset all filters">Reset</button>
+                </div>
+                <div class="actions">
+                    <button id="changePasswordBtn" title="Change business password">Change Password</button>
+                    <button id="exportBtn" title="Export bookings to CSV">Export to CSV</button>
+                </div>
+                <div id="adminStatus" class="admin-status"></div>
+            </div>
+            <div class="upcoming-summary" id="upcomingSummary">
+                <h2>Upcoming Bookings (Next 7 Days)</h2>
+                <div id="upcomingList" class="summary-list"></div>
+            </div>
+            <div class="bookings-table">
+                <h2>All Bookings</h2>
+                <table id="bookingsTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone No.</th>
+                            <th>Service</th>
+                            <th class="sortable" data-sort="date">Date <span class="sort-icon">↕</span></th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <!-- Confirmation Modal -->
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="confirmation-content">
+            <h2>Confirm Action</h2>
+            <p id="modalMessage"></p>
+            <p id="bookingDetails"></p>
+            <div class="modal-buttons">
+                <button class="btn confirm-btn" id="confirmActionBtn">Yes</button>
+                <button class="btn cancel-btn" id="cancelActionBtn">No</button>
+            </div>
+            <div id="actionFeedback" class="feedback"></div>
+        </div>
+    </div>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader">Loading...</div>
+    </div>
+    <script src="pract booking page for bussinessJS.js" defer></script>
+    <script>
+        // Password protection with blur effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedPassword = localStorage.getItem('businessPassword') || 'grooming123'; // Default password
+            const enteredPassword = prompt('Enter the business password to access the bookings dashboard:');
+
+            if (enteredPassword === null || enteredPassword.trim() !== storedPassword) {
+                alert('Incorrect password. Redirecting to home page.');
+                window.location.href = 'index.html'; // Redirect if password is wrong
+            } else {
+                // Remove blur if password is correct
+                document.body.classList.remove('blur-content');
+            }
+        });
+    </script>
+</body>
+</html>
